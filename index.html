@@ -29,12 +29,23 @@
 
         .hero-section {
             background: #000;
+            flex-direction: column;
+            gap: 3rem;
         }
 
         .hero-video {
-            width: 100%;
-            height: 100vh;
-            object-fit: cover;
+            width: 50%;
+            max-width: 600px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .scroll-text {
+            font-size: 0.875rem;
+            font-weight: 200;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
         }
 
         .liveroom-section {
@@ -83,7 +94,14 @@
         }
 
         @media (max-width: 768px) {
-            .hero-video,
+            .hero-video {
+                width: 80%;
+            }
+
+            .scroll-text {
+                font-size: 0.75rem;
+            }
+
             .tour-video,
             .logo-video {
                 object-fit: cover;
@@ -116,6 +134,7 @@
         <video class="hero-video" autoplay muted loop playsinline>
             <source src="public/3RD_logo-motion-hero.mp4" type="video/mp4">
         </video>
+        <p class="scroll-text">Scroll Down</p>
     </section>
 
     <section class="liveroom-section">
