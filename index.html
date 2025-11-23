@@ -94,6 +94,11 @@
         }
 
         @media (max-width: 768px) {
+            .hero-section {
+                gap: 1.5rem;
+                padding: 2rem 0;
+            }
+
             .hero-video {
                 width: 80%;
             }
@@ -102,29 +107,32 @@
                 font-size: 0.75rem;
             }
 
-            .tour-video,
-            .logo-video {
-                object-fit: cover;
-            }
-
-            .liveroom-image,
-            .studio-image {
-                object-fit: cover;
-                object-position: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            section {
-                min-height: 100svh;
-            }
-
-            .hero-video,
             .liveroom-image,
             .tour-video,
             .studio-image,
             .logo-video {
-                height: 100svh;
+                object-fit: contain;
+                width: 100%;
+                max-height: 100vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                gap: 1rem;
+                min-height: 100svh;
+            }
+
+            section {
+                min-height: 100svh;
+            }
+
+            .liveroom-image,
+            .tour-video,
+            .studio-image,
+            .logo-video {
+                object-fit: contain;
+                max-height: 100svh;
             }
         }
     </style>
