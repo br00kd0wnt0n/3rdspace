@@ -16,6 +16,7 @@
             color: #fff;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             overflow-x: hidden;
+            line-height: 0;
         }
 
         section {
@@ -25,6 +26,11 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            background: #000;
+        }
+
+        img, video {
+            display: block;
         }
 
         .hero-section {
@@ -48,8 +54,23 @@
             opacity: 0.6;
         }
 
+        .text-section {
+            background: #000;
+            padding: 4rem 2rem;
+            min-height: auto;
+        }
+
+        .text-content {
+            font-size: 1.5rem;
+            font-weight: 200;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
         .liveroom-section {
-            background: #0a0a0a;
+            background: #000;
             padding: 0;
         }
 
@@ -71,7 +92,7 @@
         }
 
         .studio-section {
-            background: #0a0a0a;
+            background: #000;
             padding: 0;
         }
 
@@ -107,6 +128,14 @@
                 font-size: 0.75rem;
             }
 
+            .text-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .text-content {
+                font-size: 1.25rem;
+            }
+
             .liveroom-image,
             .tour-video,
             .studio-image,
@@ -127,6 +156,14 @@
                 min-height: 100svh;
             }
 
+            .text-section {
+                padding: 2rem 1rem;
+            }
+
+            .text-content {
+                font-size: 1.1rem;
+            }
+
             .liveroom-image,
             .tour-video,
             .studio-image,
@@ -145,8 +182,16 @@
         <p class="scroll-text">Scroll Down</p>
     </section>
 
+    <section class="text-section">
+        <p class="text-content">A 3rd space for music, between the lessons and the stage</p>
+    </section>
+
     <section class="liveroom-section">
         <img src="public/3rd_Liveroom_hero.png" alt="Live Room" class="liveroom-image">
+    </section>
+
+    <section class="text-section">
+        <p class="text-content">Jam, Write, Learn, Collaborate</p>
     </section>
 
     <section class="tour-section">
@@ -155,8 +200,16 @@
         </video>
     </section>
 
+    <section class="text-section">
+        <p class="text-content">Programmed for performance and studio craft</p>
+    </section>
+
     <section class="studio-section">
         <img src="public/3rd_Studio.png" alt="Studio" class="studio-image">
+    </section>
+
+    <section class="text-section">
+        <p class="text-content">Weekly streamed performances</p>
     </section>
 
     <section class="logo-section">
