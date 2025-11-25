@@ -209,6 +209,29 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .form-message {
+            font-size: 0.9rem;
+            font-weight: 200;
+            margin-top: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-message.success {
+            color: #4ade80;
+            opacity: 1;
+        }
+
+        .form-message.error {
+            color: #f87171;
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             .hero-section {
                 gap: 1.5rem;
@@ -379,16 +402,66 @@
             <p class="footer-text">
                 To register your interest, join the mailing list or find out about events, workshops or membership - enter your email below and we will get in touch - thank you. Team 3S
             </p>
-            <form class="email-form">
+            <form class="email-form" id="emailForm">
                 <input
                     type="email"
                     class="email-input"
+                    id="emailInput"
                     placeholder="your@email.com"
                     required
                 />
-                <button type="submit" class="submit-button">Submit</button>
+                <button type="submit" class="submit-button" id="submitBtn">Submit</button>
+                <p class="form-message" id="formMessage"></p>
             </form>
         </div>
     </footer>
+
+    <script>
+        const form = document.getElementById('emailForm');
+        const emailInput = document.getElementById('emailInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+
+            if (!email) return;
+
+            // Disable button during submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
+
+            try {
+                const response = await fetch('/api/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    formMessage.textContent = data.message;
+                    formMessage.className = 'form-message success';
+                    emailInput.value = '';
+                } else {
+                    formMessage.textContent = data.message;
+                    formMessage.className = 'form-message error';
+                }
+            } catch (error) {
+                formMessage.textContent = 'An error occurred. Please try again.';
+                formMessage.className = 'form-message error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+            }
+        });
+    </script>
 </body>
 </html>
