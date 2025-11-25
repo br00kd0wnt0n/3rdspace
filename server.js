@@ -15,12 +15,17 @@ app.use(express.static(__dirname));
 let pool = null;
 
 if (process.env.DATABASE_URL) {
+  // Extract hostname for debugging (without exposing credentials)
+  const urlMatch = process.env.DATABASE_URL.match(/@([^:\/]+)/);
+  const hostname = urlMatch ? urlMatch[1] : 'unknown';
+
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
     connectionTimeoutMillis: 5000,
   });
   console.log('Database connection configured');
+  console.log('Connecting to hostname:', hostname);
 } else {
   console.warn('WARNING: DATABASE_URL not set - email signup will not work');
 }
