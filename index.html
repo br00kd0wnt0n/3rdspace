@@ -136,6 +136,79 @@
             background: #000;
         }
 
+        .footer {
+            background: #000;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            font-weight: 200;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .email-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 200;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .email-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .submit-button {
+            padding: 0.75rem 2rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 200;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
         @media (max-width: 768px) {
             .hero-section {
                 gap: 1.5rem;
@@ -173,6 +246,18 @@
                 width: 133%;
                 max-height: 100vh;
             }
+
+            .footer {
+                padding: 3rem 1.5rem;
+            }
+
+            .footer-text {
+                font-size: 0.95rem;
+            }
+
+            .email-input {
+                font-size: 0.95rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -206,6 +291,25 @@
                 object-fit: contain;
                 width: 133%;
                 max-height: 100svh;
+            }
+
+            .footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-text {
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+
+            .email-input {
+                font-size: 0.9rem;
+                padding: 0.875rem;
+            }
+
+            .submit-button {
+                font-size: 0.8rem;
+                padding: 0.625rem 1.5rem;
             }
         }
     </style>
@@ -269,5 +373,22 @@
             <source src="public/3RD_logo-motion.mp4" type="video/mp4">
         </video>
     </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">
+                To register your interest, join the mailing list or find out about events, workshops or membership - enter your email below and we will get in touch - thank you. Team 3S
+            </p>
+            <form class="email-form">
+                <input
+                    type="email"
+                    class="email-input"
+                    placeholder="your@email.com"
+                    required
+                />
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </div>
+    </footer>
 </body>
 </html>
