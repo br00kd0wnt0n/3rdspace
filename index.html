@@ -128,7 +128,7 @@
             padding: 0;
         }
 
-        .studio-image {
+        .studio-video {
             width: 100%;
             height: 100vh;
             object-fit: cover;
@@ -287,7 +287,7 @@
 
             .liveroom-image,
             .tour-video,
-            .studio-image,
+            .studio-video,
             .merch-image {
                 object-fit: contain;
                 width: 100%;
@@ -346,7 +346,7 @@
 
             .liveroom-image,
             .tour-video,
-            .studio-image,
+            .studio-video,
             .merch-image {
                 object-fit: contain;
                 max-height: 100svh;
@@ -422,7 +422,9 @@
     </section>
 
     <section class="studio-section">
-        <img src="public/3rd_Studio.png" alt="Studio" class="studio-image">
+        <video class="studio-video" autoplay muted loop playsinline>
+            <source src="public/3rd_studio.mp4" type="video/mp4">
+        </video>
     </section>
 
     <section class="text-section">
@@ -534,19 +536,16 @@
         let ticking = false;
 
         function updateVideoProgress() {
-            const rect = entranceSection.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
+            const startOffset = viewportHeight * 0.5;
+            const scrollDistance = viewportHeight;
 
-            // Video starts playing when section enters viewport (before reaching top)
-            // Starts when section is 50% into viewport, ends after scrolling through
-            const startOffset = viewportHeight * 0.5; // Start playing when section is halfway up
-            const scrollDistance = viewportHeight; // Amount of scroll to play full video
-            const scrolled = startOffset - rect.top; // Start earlier
-            const progress = Math.max(0, Math.min(1, scrolled / scrollDistance));
-
-            // Set video time based on scroll progress
+            // Entrance video
+            const entranceRect = entranceSection.getBoundingClientRect();
+            const entranceScrolled = startOffset - entranceRect.top;
+            const entranceProgress = Math.max(0, Math.min(1, entranceScrolled / scrollDistance));
             if (entranceVideo.duration && entranceVideo.readyState >= 2) {
-                entranceVideo.currentTime = progress * entranceVideo.duration;
+                entranceVideo.currentTime = entranceProgress * entranceVideo.duration;
             }
 
             ticking = false;
