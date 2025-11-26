@@ -393,7 +393,7 @@
 
     <section class="entrance-section" id="entranceSection">
         <div class="entrance-video-container">
-            <video class="entrance-video" id="entranceVideo" muted playsinline preload="auto">
+            <video class="entrance-video" id="entranceVideo" muted playsinline preload="metadata" autoplay>
                 <source src="public/3rd_Entrance.mp4" type="video/mp4">
             </video>
         </div>
@@ -515,9 +515,19 @@
         const entranceVideo = document.getElementById('entranceVideo');
         const entranceSection = document.getElementById('entranceSection');
 
+        // Pause video immediately and set to start (autoplay helps mobile load it)
+        entranceVideo.pause();
+        entranceVideo.currentTime = 0;
+
         // Wait for video metadata to load
         entranceVideo.addEventListener('loadedmetadata', () => {
+            entranceVideo.pause();
             entranceVideo.currentTime = 0;
+        });
+
+        // Also handle canplay for mobile
+        entranceVideo.addEventListener('canplay', () => {
+            entranceVideo.pause();
         });
 
         // Throttle scroll events for better performance
@@ -535,7 +545,7 @@
             const progress = Math.max(0, Math.min(1, scrolled / scrollDistance));
 
             // Set video time based on scroll progress
-            if (entranceVideo.duration) {
+            if (entranceVideo.duration && entranceVideo.readyState >= 2) {
                 entranceVideo.currentTime = progress * entranceVideo.duration;
             }
 
