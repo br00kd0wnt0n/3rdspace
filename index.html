@@ -80,10 +80,11 @@
         .entrance-section {
             background: #000;
             padding: 0;
-            height: 200vh; /* 100vh video + 100vh scroll distance */
+            height: 200vh; /* 100vh visible + 100vh scroll distance */
             min-height: auto;
             position: relative;
             display: block;
+            margin-bottom: -100vh; /* Pull next section up to eliminate black gap */
         }
 
         .entrance-video-container {
@@ -277,16 +278,11 @@
 
             .entrance-section {
                 height: 200vh;
-            }
-
-            .entrance-video-container {
-                height: 100vh;
+                margin-bottom: -100vh;
             }
 
             .entrance-video {
                 object-fit: contain;
-                width: 100%;
-                height: 100vh;
             }
 
             .liveroom-image,
@@ -337,6 +333,7 @@
 
             .entrance-section {
                 height: 200svh;
+                margin-bottom: -100svh;
             }
 
             .entrance-video-container {
@@ -345,8 +342,6 @@
 
             .entrance-video {
                 object-fit: contain;
-                width: 100%;
-                height: 100svh;
             }
 
             .liveroom-image,
@@ -532,10 +527,11 @@
             const rect = entranceSection.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
 
-            // Video starts playing when section top hits viewport top (rect.top <= 0)
-            // Video ends when we've scrolled one viewport height through it
+            // Video starts playing when section enters viewport (before reaching top)
+            // Starts when section is 50% into viewport, ends after scrolling through
+            const startOffset = viewportHeight * 0.5; // Start playing when section is halfway up
             const scrollDistance = viewportHeight; // Amount of scroll to play full video
-            const scrolled = -rect.top; // How far past the top of section we've scrolled
+            const scrolled = startOffset - rect.top; // Start earlier
             const progress = Math.max(0, Math.min(1, scrolled / scrollDistance));
 
             // Set video time based on scroll progress
